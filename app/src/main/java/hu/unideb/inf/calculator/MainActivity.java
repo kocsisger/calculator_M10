@@ -31,28 +31,40 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void handleButtonPress(View view) {
-        Button button = (Button)view;
-        switch (button.getText().toString()){
-            case "CE": resultTextView.setText("0"); break;
-            case "=" : resultTextView.setText(
-                           calculate(resultTextView.getText().toString())
-                       ); break;
-            default : resultTextView.append(button.getText());
+        Button button = (Button) view;
+        switch (button.getText().toString()) {
+            case "CE":
+                resultTextView.setText("0");
+                break;
+            case "=":
+                resultTextView.setText(
+                        calculate(resultTextView.getText().toString())
+                );
+                break;
+            default:
+                if (resultTextView.getText().toString().equals("0"))
+                    resultTextView.setText(button.getText());
+                else
+                    resultTextView.append(button.getText());
         }
     }
 
     private String calculate(String expression) {
-        String op1_str = expression.split("[+-/*]")[0];
+        String op1_str = expression.split("[+\\-/*]")[0];
         int op1 = Integer.parseInt(op1_str);
-        int op2 = Integer.parseInt(expression.split("[+-/*]")[1]);
+        int op2 = Integer.parseInt(expression.split("[+\\-/*]")[1]);
 
         char operator = expression.charAt(op1_str.length());
 
-        switch (operator){
-            case '+': return "" + (op1+op2);
-            case '-': return "" + (op1-op2);
-            case '*': return "" + (op1*op2);
-            case '/': return "" + (op1/op2);
+        switch (operator) {
+            case '+':
+                return "" + (op1 + op2);
+            case '-':
+                return "" + (op1 - op2);
+            case '*':
+                return "" + (op1 * op2);
+            case '/':
+                return "" + (op1 / op2);
         }
         return "ERROR";
     }
