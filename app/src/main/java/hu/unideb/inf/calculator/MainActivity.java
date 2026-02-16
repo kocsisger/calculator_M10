@@ -48,8 +48,12 @@ public class MainActivity extends AppCompatActivity {
 
         char operator = expression.charAt(op1_str.length());
 
-         Log.d("TEST_OP", "Operands: " + op1 + " "  + operator + " " + op2);
-
-         return "-";
+        switch (operator){
+            case '+': return "" + (op1+op2);
+            case '-': return "" + (op1-op2);
+            case '*': return "" + (op1*op2);
+            case '/': return "" + (op1/op2);
+        }
+        return "ERROR";
     }
 }
